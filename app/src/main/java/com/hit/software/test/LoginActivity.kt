@@ -14,11 +14,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     * 点击regist按钮跳转到注册界面
+     * 点击register按钮跳转到注册界面
      */
     fun jumpRegist(){
         val intent = Intent(this,RegistActivity::class.java)
-        button_regist.setOnClickListener({startActivity(intent)})
+        button_regist.setOnClickListener {startActivity(intent)}
     }
 
     /**
@@ -26,6 +26,6 @@ class LoginActivity : AppCompatActivity() {
      */
     fun jumpQuestion(){
         val intent = Intent(this,QuestionActivity::class.java)
-        button_login.setOnClickListener({startActivity(intent)})
+        button_login.setOnClickListener {startActivity(intent)}
     }
 }
