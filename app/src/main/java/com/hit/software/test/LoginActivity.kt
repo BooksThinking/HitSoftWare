@@ -21,6 +21,9 @@ class LoginActivity : AppCompatActivity() {
         button_regist.setOnClickListener({startActivity(intent)})
     }
 
+    /**
+     * 点击跳转到答题界面
+     */
     fun jumpQuestion(){
         val intent = Intent(this,QuestionActivity::class.java)
         button_login.setOnClickListener({startActivity(intent)})
