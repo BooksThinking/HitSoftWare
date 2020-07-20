@@ -8,7 +8,7 @@
     tools:context=".RegistActivity">
 
     <EditText
-        android:id="@+id/editTextUserName"
+        android:id="@+id/editTextRegisterUsername"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="300dp"
@@ -16,39 +16,42 @@
         android:hint="请输入用户名称"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:width="150dp"
-        android:text="注册"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextRegisterPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="请输入用户密码"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUserName"
-        app:layout_constraintStart_toStartOf="@+id/editTextUserName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterUsername"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterUsername" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="40dp"
         android:text="注册"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextUserName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUserName"
-        app:layout_constraintStart_toStartOf="@+id/editTextUserName" />
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextRegisterUsername"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterUsername"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextRegisterUsername" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:width="160dp"
+        android:text="注册"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

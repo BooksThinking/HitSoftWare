@@ -1,6 +1,6 @@
 package com.hit.software.test
 
 interface WebResponse {
-    fun getResponse(content:String)
-    fun errorMsg()
+    fun requestSucceeded(content:String)
+    fun requestFailed()
 }

@@ -8,9 +8,13 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_question.*
 
 class QuestionActivity : AppCompatActivity() {
+
+    var QA: ArrayList<*>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
+        val bundle = intent.extras
+        QA = bundle!!.getSerializable("QA") as ArrayList<*>
     }
 
 

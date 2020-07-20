@@ -11,23 +11,21 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class RegistActivity : AppCompatActivity(), WebResponse {
+class MainActivity : AppCompatActivity(), WebResponse {
 
     private var mainScope: CoroutineScope? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_regist)
+        setContentView(R.layout.activity_main)
         mainScope = MainScope()
-        setRegisterButton()
-
+        setStartButton()
     }
 
-    private fun setRegisterButton() {
+    fun setStartButton() {
         button_register.setOnClickListener {
-            val request = "{\"user_name\":\""+editTextRegisterUsername.text.toString()+ "\",\"user_password\":\""+editTextRegisterPassword.text.toString()+"\"}"
-            Log.d("Info", "发送注册请求: $request")
+            Log.d("Info", "请求问题及答案")
             val This = this
-            mainScope!!.launch { WebRequest.post(This, "", request)}
+            mainScope!!.launch { WebRequest.get(This, "")}
         }
     }
 
@@ -36,22 +34,23 @@ class RegistActivity : AppCompatActivity(), WebResponse {
      */
 
     override fun requestSucceeded(content: String) {
-        val registerResult = ProcessResponse.userRegister(content)
-        if (registerResult == "success") {
-            Toast.makeText(applicationContext, "注册成功", Toast.LENGTH_SHORT).show()
+        val QA = ProcessResponse.getQA(content)
+        if (QA != null) {
             mainScope!!.cancel()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            val bundle = Bundle()
+            bundle.putSerializable("QA", QA)
+            val intent = Intent(this, QuestionActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
         else {
             Log.d("Warning", "响应出错: $content")
-            Toast.makeText(applicationContext, "注册失败", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "获取题目失败", Toast.LENGTH_SHORT).show()
         }
 
     }
 
     override fun requestFailed() {
-        Toast.makeText(applicationContext, "注册失败", Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "获取题目失败", Toast.LENGTH_SHORT).show()
     }
-
 }

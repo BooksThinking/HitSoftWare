@@ -21,12 +21,12 @@ object WebRequest {
         ).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d("Error", "网络请求失败")
-                webResponse.errorMsg()
+                webResponse.requestFailed()
             }
 
             override fun onResponse(call: Call, response: Response) {
                 Log.d("Info", "返回成功")
-                webResponse.getResponse(response.body?.string().toString())
+                webResponse.requestSucceeded(response.body?.string().toString())
             }
         })
     }
@@ -47,12 +47,12 @@ object WebRequest {
         ).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d("Error", "网络请求失败")
-                webResponse.errorMsg()
+                webResponse.requestFailed()
             }
 
             override fun onResponse(call: Call, response: Response) {
                 Log.d("Info", "返回成功")
-                webResponse.getResponse(response.body?.string().toString())
+                webResponse.requestSucceeded(response.body?.string().toString())
             }
 
         })
