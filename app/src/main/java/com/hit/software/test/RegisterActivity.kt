@@ -7,14 +7,13 @@ import android.os.Message
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), WebResponse {
+class RegisterActivity : AppCompatActivity(), WebResponse {
 
     private var mainScope: CoroutineScope? = null
     var mHandler = object : Handler() {
@@ -22,21 +21,35 @@ class MainActivity : AppCompatActivity(), WebResponse {
             if (msg.what == 0) {
                 Toast.makeText(applicationContext, msg.obj.toString(), Toast.LENGTH_SHORT).show()
             }
+            if (msg.what == 1) {
+                button_register.isEnabled = true
+                Toast.makeText(applicationContext, msg.obj.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        mainScope = MainScope()
-        setStartButton()
     }
 
-    private fun setStartButton() {
-        button_start.setOnClickListener {
-            Log.d("Info", "请求问题及答案")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_register)
+        mainScope = MainScope()
+        setRegisterButton()
+
+    }
+
+    private fun setRegisterButton() {
+        button_register.setOnClickListener {
+            button_register.isEnabled = false
+            val request = "{\"user_name\":\""+editTextRegisterUsername.text.toString()+ "\",\"user_password\":\""+editTextRegisterPassword.text.toString()+"\"}"
+            Log.d("Info", "发送注册请求: $request")
             val This = this
-            mainScope!!.launch { WebRequest.get(This, "http://192.168.43.132:8080/")}
+            mainScope!!.launch { WebRequest.post(This, "http://192.168.43.132:8080/mregister", request)}
         }
+    }
+
+    override fun onBackPressed() {
+        mainScope!!.cancel()
+        finish()
+        super.onBackPressed()
     }
 
     /**
@@ -44,23 +57,21 @@ class MainActivity : AppCompatActivity(), WebResponse {
      */
 
     override fun requestSucceeded(content: String) {
-        val result = ProcessResponse.getQA(content)
-        if (result != null) {
-            val QA = result.first
-            val correctAnswers = result.second
+        val registerResult = ProcessResponse.userRegister(content)
+        if (registerResult == "success") {
+            val mMessage = Message()
+            mMessage.what = 0
+            mMessage.obj = "注册成功"
+            mHandler.sendMessage(mMessage)
             mainScope!!.cancel()
-            val bundle = Bundle()
-            bundle.putSerializable("qa", QA)
-            bundle.putSerializable("ca", correctAnswers)
-            val intent = Intent(this, QuestionActivity::class.java)
-            intent.putExtras(bundle)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
         else {
             Log.d("Warning", "响应出错: $content")
             val mMessage = Message()
             mMessage.what = 0
-            mMessage.obj = "获取题目失败"
+            mMessage.obj = "注册失败"
             mHandler.sendMessage(mMessage)
         }
 
@@ -69,7 +80,8 @@ class MainActivity : AppCompatActivity(), WebResponse {
     override fun requestFailed() {
         val mMessage = Message()
         mMessage.what = 0
-        mMessage.obj = "获取题目失败"
+        mMessage.obj = "注册失败"
         mHandler.sendMessage(mMessage)
     }
+
 }

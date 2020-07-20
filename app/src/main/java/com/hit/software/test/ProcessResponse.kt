@@ -36,7 +36,6 @@ object ProcessResponse {
             when (jsonData.optString("type", "")) {
                 "user_register" -> {
                     if (jsonData.optString("data") == "true") {
-                        //用户登录成功
                         return "success"
                     } else {
                         return jsonData.optString("error")
@@ -53,7 +52,7 @@ object ProcessResponse {
 
     }
 
-    fun getQA(res: String): ArrayList<List<String>>? {
+    fun getQA(res: String): Pair<ArrayList<List<String>>, ArrayList<String>>? {
         // TODO: 处理响应中的题目答案
         return null
     }

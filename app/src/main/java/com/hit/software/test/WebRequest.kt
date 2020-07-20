@@ -12,8 +12,11 @@ object WebRequest {
 
     fun get(webResponse: WebResponse, url: String) {
         mOkHttpClient.newBuilder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+            .callTimeout(6_000, TimeUnit.MILLISECONDS)
+            .connectTimeout(6_000, TimeUnit.MILLISECONDS)
+            .readTimeout(10_000, TimeUnit.MILLISECONDS)
+            .writeTimeout(10_000, TimeUnit.MILLISECONDS)
+            .build()
         mOkHttpClient.newCall(
             Request.Builder()
                 .url(url)
@@ -36,8 +39,11 @@ object WebRequest {
              postBody: String,
              contentType: String = "application/x-form-urlencoded") {
         mOkHttpClient.newBuilder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(5, TimeUnit.SECONDS)
+            .callTimeout(6_000, TimeUnit.MILLISECONDS)
+            .connectTimeout(6_000, TimeUnit.MILLISECONDS)
+            .readTimeout(10_000, TimeUnit.MILLISECONDS)
+            .writeTimeout(10_000, TimeUnit.MILLISECONDS)
+            .build()
         mOkHttpClient.newCall(
             Request.Builder()
                 .url(url)
@@ -46,7 +52,7 @@ object WebRequest {
                 .build()
         ).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.d("Error", "网络请求失败")
+                Log.d("Error", "网络请求失败 $url")
                 webResponse.requestFailed()
             }
 
