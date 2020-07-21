@@ -14,7 +14,7 @@ class ReviewActivity : Activity() {
     private var index = 0
     private var total = 0
     private var answers: HashMap<Int, Int>? = null
-    private val radioButtons: List<RadioButton> = listOf(radioButton_a_review, radioButton_b_review, radioButton_c_review, radioButton_d_review)
+    private val radioButtons: List<Int> = listOf(R.id.radioButton_a_review, R.id.radioButton_b_review, R.id.radioButton_c_review, R.id.radioButton_d_review)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class ReviewActivity : Activity() {
         button_pre_review.isEnabled = false
         textViewQuestionNumber_review.text = String.format("1/%d", total)
         for (radioButton in radioButtons) {
-            radioButton.isEnabled = false
+            findViewById<RadioButton>(radioButton).isEnabled = false
         }
         setNextButton()
         setPreButton()
@@ -52,7 +52,7 @@ class ReviewActivity : Activity() {
                 writeQuestion()
                 radioGroup_review.clearCheck()
                 if (answers!![index] != null) {
-                    radioButtons[answers!![index]!! - 1].isChecked = true
+                    findViewById<RadioButton>(radioButtons[answers!![index]!! - 1]).isChecked = true
                 }
             }
         }
@@ -71,7 +71,7 @@ class ReviewActivity : Activity() {
             writeQuestion()
             radioGroup_review.clearCheck()
             if (answers!![index] != null) {
-                radioButtons[answers!![index]!! - 1].isChecked = true
+                findViewById<RadioButton>(radioButtons[answers!![index]!! - 1]).isChecked = true
             }
 
         }
@@ -86,7 +86,7 @@ class ReviewActivity : Activity() {
         val options = listOf("A", "B", "C", "D")
         textViewShowAnswer.text = String.format("您的答案：%s    正确答案：%s", options[answers!![index]!! - 1], options[correctAnswers!![index] - 1])
         for (i in 0..3) {
-            radioButtons[i].text = String.format("%s. %s", options[i], QA!![index][i + 1])
+            findViewById<RadioButton>(radioButtons[i]).text = String.format("%s. %s", options[i], QA!![index][i + 1])
         }
     }
 

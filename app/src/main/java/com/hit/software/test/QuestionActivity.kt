@@ -17,7 +17,7 @@ class QuestionActivity : Activity() {
     private var total = 0
     private val answers = hashMapOf<Int, Int>()
     private val radioButtonMap = hashMapOf<Int, Int>(R.id.radioButton_a to 1, R.id.radioButton_b to 2, R.id.radioButton_c to 3, R.id.radioButton_d to 4)
-    private val radioButtons: List<RadioButton> = listOf(radioButton_a, radioButton_b, radioButton_c, radioButton_d)
+    private val radioButtons: List<Int> = listOf(R.id.radioButton_a, R.id.radioButton_b, R.id.radioButton_c, R.id.radioButton_d)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class QuestionActivity : Activity() {
                 writeQuestion()
                 radioGroup.clearCheck()
                 if (answers[index] != null) {
-                    radioButtons[answers[index]!! - 1].isChecked = true
+                    findViewById<RadioButton>(radioButtons[answers[index]!! - 1]).isChecked = true
                 }
             }
             if (index == total) {
@@ -86,7 +86,7 @@ class QuestionActivity : Activity() {
             writeQuestion()
             radioGroup.clearCheck()
             if (answers[index] != null) {
-                radioButtons[answers[index]!! - 1].isChecked = true
+                findViewById<RadioButton>(radioButtons[answers[index]!! - 1]).isChecked = true
             }
 
         }
@@ -100,7 +100,7 @@ class QuestionActivity : Activity() {
         textViewQuestion.text = QA!![index][0]
         val options = listOf("A", "B", "C", "D")
         for (i in 0..3) {
-            radioButtons[i].text = String.format("%s. %s", options[i], QA!![index][i + 1])
+            findViewById<RadioButton>(radioButtons[i]).text = String.format("%s. %s", options[i], QA!![index][i + 1])
         }
     }
 
