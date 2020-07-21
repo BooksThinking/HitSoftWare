@@ -38,6 +38,7 @@ object WebRequest {
              url: String,
              postBody: String,
              contentType: String = "application/x-form-urlencoded") {
+        Log.d("Info", url)
         mOkHttpClient.newBuilder()
             .callTimeout(6_000, TimeUnit.MILLISECONDS)
             .connectTimeout(6_000, TimeUnit.MILLISECONDS)

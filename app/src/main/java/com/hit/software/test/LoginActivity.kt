@@ -46,7 +46,7 @@ class LoginActivity : Activity(), WebResponse {
             val request = "{\"user_name\":\""+editTextUsername.text.toString()+ "\",\"user_password\":\""+editTextPassword.text.toString()+"\"}"
             Log.d("Info", "发送登录请求: $request")
             val This = this
-            mainScope!!.launch { WebRequest.post(This, "${R.string.url}/mlogin", request) }
+            mainScope!!.launch { WebRequest.post(This, "${getString(R.string.url)}/mlogin", request) }
 
         }
     }

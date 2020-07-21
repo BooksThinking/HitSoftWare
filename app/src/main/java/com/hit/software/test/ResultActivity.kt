@@ -59,7 +59,7 @@ class ResultActivity : Activity(), WebResponse {
             Log.d("Info", "请求问题及答案")
             val request = "{\"number\": 5}"
             val This = this
-            mainScope!!.launch { WebRequest.post(This, "${R.string.url}/mque", request)}
+            mainScope!!.launch { WebRequest.post(This, "${getString(R.string.url)}/mque", request)}
         }
     }
 

@@ -43,7 +43,7 @@ class RegisterActivity : Activity(), WebResponse {
             val request = "{\"user_name\":\""+editTextRegisterUsername.text.toString()+ "\",\"user_password\":\""+editTextRegisterPassword.text.toString()+"\"}"
             Log.d("Info", "发送注册请求: $request")
             val This = this
-            mainScope!!.launch { WebRequest.post(This, "${R.string.url}/mregister", request)}
+            mainScope!!.launch { WebRequest.post(This, "${getString(R.string.url)}/mregister", request)}
         }
     }
 
