@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewQuestion"
+        android:id="@+id/textViewQuestion_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="40dp"
@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteY="70dp" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroup_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="40dp"
@@ -30,7 +30,7 @@
         tools:layout_editor_absoluteY="213dp">
 
         <RadioButton
-            android:id="@+id/radioButton_a"
+            android:id="@+id/radioButton_a_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -38,7 +38,7 @@
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioButton_b"
+            android:id="@+id/radioButton_b_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -46,7 +46,7 @@
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioButton_c"
+            android:id="@+id/radioButton_c_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -54,7 +54,7 @@
             android:textSize="18sp" />
 
         <RadioButton
-            android:id="@+id/radioButton_d"
+            android:id="@+id/radioButton_d_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -68,19 +68,18 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button_next"
+            android:id="@+id/button_next_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="下一题"
-            app:layout_constraintBottom_toBottomOf="@+id/button_pre"
+            app:layout_constraintBottom_toBottomOf="@+id/button_pre_review"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.80"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button_pre"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/button_pre_review" />
 
         <Button
-            android:id="@+id/button_pre"
+            android:id="@+id/button_pre_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="72dp"
@@ -91,15 +90,26 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textViewQuestionNumber"
+            android:id="@+id/textViewQuestionNumber_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/button_pre"
-            app:layout_constraintEnd_toStartOf="@+id/button_next"
-            app:layout_constraintStart_toEndOf="@+id/button_pre"
-            app:layout_constraintTop_toTopOf="@+id/button_pre" />
+            app:layout_constraintBottom_toBottomOf="@+id/button_pre_review"
+            app:layout_constraintEnd_toStartOf="@+id/button_next_review"
+            app:layout_constraintStart_toEndOf="@+id/button_pre_review"
+            app:layout_constraintTop_toTopOf="@+id/button_pre_review" />
+
+        <TextView
+            android:id="@+id/textViewShowAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:text="您的答案：A    正确答案：B"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewQuestionNumber_review"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

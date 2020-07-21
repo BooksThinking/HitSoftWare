@@ -1,5 +1,6 @@
 package com.hit.software.test
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,11 +26,12 @@ class QuestionActivity : AppCompatActivity() {
         correctAnswers = bundle.getSerializable("ca") as ArrayList<*>
         total = QA!!.size
         button_pre.isEnabled = false
+        textViewQuestionNumber.text = String.format("1/%d", total)
         setNextButton(bundle)
         setPreButton()
     }
 
-    fun setNextButton(bundle: Bundle) {
+    private fun setNextButton(bundle: Bundle) {
         button_next.setOnClickListener {
             if (radioGroup.checkedRadioButtonId != -1) {
                 answers[index] = radioButtonMap[radioGroup.checkedRadioButtonId]!!
@@ -42,7 +44,7 @@ class QuestionActivity : AppCompatActivity() {
             }
             index++
             if (index < total) {
-                button_pre.isEnabled = true
+                textViewQuestionNumber.text = String.format("%d/%d", index + 1, total)
                 writeQuestion()
                 radioGroup.clearCheck()
                 if (answers[index] != null) {
@@ -67,7 +69,7 @@ class QuestionActivity : AppCompatActivity() {
         }
     }
 
-    fun setPreButton() {
+    private fun setPreButton() {
         button_pre.setOnClickListener {
             if (radioGroup.checkedRadioButtonId != -1) {
                 answers[index] = radioButtonMap[radioGroup.checkedRadioButtonId]!!
@@ -79,26 +81,25 @@ class QuestionActivity : AppCompatActivity() {
                 button_next.text = "下一题"
             }
             index--
-            if (index < total) {
-                button_pre.isEnabled = true
-                writeQuestion()
-                radioGroup.clearCheck()
-                if (answers[index] != null) {
-                    radioButtons[answers[index]!! - 1].isChecked = true
-                }
+            textViewQuestionNumber.text = String.format("%d/%d", index + 1, total)
+            writeQuestion()
+            radioGroup.clearCheck()
+            if (answers[index] != null) {
+                radioButtons[answers[index]!! - 1].isChecked = true
             }
+
         }
     }
 
     /**
      * 通过这个方法动态的更改控件之中的信息
      */
-    private fun writeQuestion(){
+    private fun writeQuestion() {
         // 设置控件文本
-        textViewQuestion.text = QA?.get(index)?.get(0)
+        textViewQuestion.text = QA!![index][0]
+        val options = listOf("A", "B", "C", "D")
         for (i in 0..3) {
-            radioButtons[i].text = QA?.get(index)?.get(i + 1)
-            radioButtons[i].visibility = View.VISIBLE
+            radioButtons[i].text = String.format("%s. %s", options[i], QA!![index][i + 1])
         }
     }
 

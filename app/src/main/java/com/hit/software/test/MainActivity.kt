@@ -1,5 +1,6 @@
 package com.hit.software.test
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,7 +15,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), WebResponse {
+class MainActivity : Activity(), WebResponse {
 
     private var mainScope: CoroutineScope? = null
     var mHandler = object : Handler() {
