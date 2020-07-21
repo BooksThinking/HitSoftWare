@@ -8,6 +8,7 @@ import android.os.Message
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
@@ -40,8 +41,9 @@ class MainActivity : Activity(), WebResponse {
         button_start.setOnClickListener {
             button_start.isEnabled = false
             Log.d("Info", "请求问题及答案")
+            val request = "{\"number\": 5}"
             val This = this
-            mainScope!!.launch { WebRequest.get(This, "http://192.168.43.132:8080/")}
+            mainScope!!.launch { WebRequest.post(This, "http://192.168.43.132:8080/mque", request)}
         }
     }
 

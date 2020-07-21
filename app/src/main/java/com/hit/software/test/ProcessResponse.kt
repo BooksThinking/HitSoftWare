@@ -53,7 +53,28 @@ object ProcessResponse {
     }
 
     fun getQA(res: String): Pair<ArrayList<List<String>>, ArrayList<String>>? {
-        // TODO: 处理响应中的题目答案
+        try {
+            val jsonData = JSONObject(res)
+            val questionArray = jsonData.optJSONArray("data")!!
+            val questions = ArrayList<List<String>>()
+            val answers = ArrayList<String>()
+            for (i in 0 until questionArray.length()) {
+                val questionObject = questionArray.getJSONObject(i)
+                val question = ArrayList<String>()
+                question.add(questionObject.getString("queTitle"))
+                question.add(questionObject.getString("queA"))
+                question.add(questionObject.getString("queB"))
+                question.add(questionObject.getString("queC"))
+                question.add(questionObject.getString("queD"))
+                questions.add(question)
+                answers.add(questionObject.getString("queAnswer"))
+            }
+            return Pair(questions, answers)
+        } catch (e: Exception) {
+            print(res)
+            e.printStackTrace()
+            return null
+        }
         return null
     }
 }
