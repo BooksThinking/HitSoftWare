@@ -43,7 +43,7 @@ class MainActivity : Activity(), WebResponse {
             Log.d("Info", "请求问题及答案")
             val request = "{\"number\": 5}"
             val This = this
-            mainScope!!.launch { WebRequest.post(This, "http://192.168.43.132:8080/mque", request)}
+            mainScope!!.launch { WebRequest.post(This, "${R.string.url}/mque", request)}
         }
     }
 
