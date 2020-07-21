@@ -56,7 +56,6 @@ class LoginActivity : Activity(), WebResponse {
      */
     private fun setGotoRegisterButton() {
         button_goto_register.setOnClickListener {
-            mainScope!!.cancel()
             val intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent)
             button_login.isEnabled = true

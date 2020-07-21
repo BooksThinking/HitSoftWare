@@ -1,5 +1,6 @@
 package com.hit.software.test
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
-class ResultActivity : AppCompatActivity(), WebResponse {
+class ResultActivity : Activity(), WebResponse {
 
     private var mainScope: CoroutineScope? = null
     var mHandler = object : Handler() {
@@ -83,6 +84,7 @@ class ResultActivity : AppCompatActivity(), WebResponse {
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
+            finish()
         }
         else {
             Log.d("Warning", "响应出错: $content")

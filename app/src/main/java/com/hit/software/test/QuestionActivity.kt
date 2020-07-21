@@ -1,6 +1,7 @@
 package com.hit.software.test
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +9,7 @@ import android.view.View
 import android.widget.RadioButton
 import kotlinx.android.synthetic.main.activity_question.*
 
-class QuestionActivity : AppCompatActivity() {
+class QuestionActivity : Activity() {
 
     private var QA: ArrayList<List<String>>? = null
     private var correctAnswers: ArrayList<*>? = null

@@ -21,6 +21,10 @@ class MainActivity : Activity(), WebResponse {
     var mHandler = object : Handler() {
         override fun handleMessage(msg: Message) {
             if (msg.what == 0) {
+                button_start.isEnabled = true
+            }
+            if (msg.what == 1) {
+                button_start.isEnabled = true
                 Toast.makeText(applicationContext, msg.obj.toString(), Toast.LENGTH_SHORT).show()
             }
         }
@@ -34,6 +38,7 @@ class MainActivity : Activity(), WebResponse {
 
     private fun setStartButton() {
         button_start.setOnClickListener {
+            button_start.isEnabled = false
             Log.d("Info", "请求问题及答案")
             val This = this
             mainScope!!.launch { WebRequest.get(This, "http://192.168.43.132:8080/")}
@@ -53,6 +58,10 @@ class MainActivity : Activity(), WebResponse {
             val bundle = Bundle()
             bundle.putSerializable("qa", QA)
             bundle.putSerializable("ca", correctAnswers)
+            val mMessage = Message()
+            mMessage.what = 0
+            mMessage.obj = ""
+            mHandler.sendMessage(mMessage)
             val intent = Intent(this, QuestionActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
@@ -60,7 +69,7 @@ class MainActivity : Activity(), WebResponse {
         else {
             Log.d("Warning", "响应出错: $content")
             val mMessage = Message()
-            mMessage.what = 0
+            mMessage.what = 1
             mMessage.obj = "获取题目失败"
             mHandler.sendMessage(mMessage)
         }
@@ -69,7 +78,7 @@ class MainActivity : Activity(), WebResponse {
 
     override fun requestFailed() {
         val mMessage = Message()
-        mMessage.what = 0
+        mMessage.what = 1
         mMessage.obj = "获取题目失败"
         mHandler.sendMessage(mMessage)
     }

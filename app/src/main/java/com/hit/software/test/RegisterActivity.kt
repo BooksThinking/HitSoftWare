@@ -71,7 +71,7 @@ class RegisterActivity : Activity(), WebResponse {
         else {
             Log.d("Warning", "响应出错: $content")
             val mMessage = Message()
-            mMessage.what = 0
+            mMessage.what = 1
             mMessage.obj = "注册失败"
             mHandler.sendMessage(mMessage)
         }
@@ -80,7 +80,7 @@ class RegisterActivity : Activity(), WebResponse {
 
     override fun requestFailed() {
         val mMessage = Message()
-        mMessage.what = 0
+        mMessage.what = 1
         mMessage.obj = "注册失败"
         mHandler.sendMessage(mMessage)
     }

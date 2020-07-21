@@ -1,12 +1,13 @@
 package com.hit.software.test
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.RadioButton
 import kotlinx.android.synthetic.main.activity_review.*
 import kotlinx.coroutines.cancel
 
-class ReviewActivity : AppCompatActivity() {
+class ReviewActivity : Activity() {
 
     private var QA: ArrayList<List<String>>? = null
     private var correctAnswers: ArrayList<Int>? = null
